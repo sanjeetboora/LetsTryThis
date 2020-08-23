@@ -7,9 +7,11 @@ const getData = () => {
 const debounce = function (fn, del) {
   let timer;
   return function () {
+    let context = this;
+    args = arguments;
     clearTimeout(timer);
-    timer = setTimeout(function () {
-      getData();
+    timer = setTimeout(() => {
+      getData.apply(context, args);
     }, del);
   };
 };
